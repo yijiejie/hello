@@ -146,7 +146,7 @@ console.log('我是程序员能看到的');
 
   * 创建数组
 
-    > var array=new Array();
+    > var array=new Array(3);//3是数组长度若为（2，3）那么2和3就是数组元素
     >
     > var arr=[];//直接创建一个空数组
     >
@@ -154,10 +154,48 @@ console.log('我是程序员能看到的');
 
   * console.log(array)；打印数组的所有内容以及length
 
+  * instanceof和isArray都可以用来检测数据类型是否为数组
+
+    > arr instanceof Array
+    >
+    > Array.isArray(arr)
+
   * 数组新增元素
 
     * 直接修改array.length
     * 直接追加元素（length是会变化的；在遇到用k时，直接用newArray.length代替）
+    
+  * 添加删除数组元素的方法
+
+    * 添加arr.push(若是多个元素，用,隔开);返回新数组长度
+    * 在数组头部添加arr.unshift();返回新数组长度
+    * 删除是pop，一次只能删除一个元素，返回删除的元素内容
+
+  * 自带方法：
+
+    > arr.reverse();
+    >
+    > arr.sort();//排序只会排前面那一位11在7前面，改写
+    >
+    > ```
+    > arr.sort(function(a,b){
+    >   return a-b;
+    > })
+    > ```
+    >
+    > arr.indexof();//在数组中查找看是否有该元素，若有返回第一个找到的索引，找不到返回-1
+    >
+    > arr.lastIndexof();
+    >
+    > arr.toString();//把数组内容转换为字符串输出，用逗号分隔
+    >
+    > arr.join(分隔符，默认为逗号);//
+    >
+    > arr1.cancat(arr2);//返回一个合并了arr1和arr2的新数组
+    >
+    > arr.slice();//若只有一个参数就拷贝该索引号到数组结束的所有元素；否则拷贝[begin,end)的元素；
+    >
+    > arr.splice(index,0/1,元素)；//0代表在索引处插入，1代表在索引处替换
 
 * **函数**
 
@@ -285,4 +323,69 @@ console.log('我是程序员能看到的');
 > }
 > ```
 >
-> 
+
+#### 内置对象(js自带可直接使用)MDN文档
+
+* Math对象（不是构造函数，所以无需new）
+  * Math.floor()
+  * Math.ceil()
+  * Math.round();//四舍五入，在.5问题上，四舍五入的结果就是大的数
+  
+* Date对象
+  
+  * new Date();//返回当前时间
+  
+  * getMonth（）；getDate();
+  * getDay();//返回周几，如周日：0，在输出时用一个数组[“星期天”，……]
+  * 时间戳：通过valueof（），getTime（）得到此时此刻距离1970年1.1总的毫秒数；或者是**var date=+new  Date(也可为用户输入的时间);**H5新增的Date.now();
+
+> 秒杀倒计时案例：利用时间戳，将来的时间毫秒数减去当前的时间毫秒数。再转化为时、分、秒
+>
+> 输入的要是标准时间格式（‘2019-9-5 18:00:00’）
+>
+> ![image-20210520211700993](C:\Users\tracy\AppData\Roaming\Typora\typora-user-images\image-20210520211700993.png)
+
+* 字符串
+
+  > var str=‘andy’；//str有length属性，简单数据类型也有属性？它是基本包装类型，事实上进行了var str=new String ('andy')；
+  >
+  > **字符串不可变！**给str重新赋值时，是开辟了新的地址空间
+  >
+  > str.indexOf(字符)；//返回索引号，若为(字符，index)从index开始找字符
+  >
+  > str.charAt(index);//返回字符
+  >
+  > str.charCodeAt(index);返回ASCII码，一般应用于针对用户键入来进行操作
+  >
+  > ***H5新增***：str[index]
+  >
+  > eg：对于判断字符串中字符的出现次数
+  >
+  > 类比object.age我们在字符串上用str.a。
+  >
+  > var chars=str.charAt(i);//返回的chars就是一个字符，也是str的某个属性名，对o[chars]就是属性值，参考之前遍历对象时的o[k]
+
+  * 一些方法
+  
+    >str.substr(起始位置，截取的字符个数)；//截取字符串，若字符个数省略了，那就是整个字符串
+    >
+    >str.replace(被替换的字符，替换为的字符)；//若只进行一次，只会替换第一个碰到的
+    >
+    >str.split();//join是把数组合成字符串
+
+* 数据类型和堆栈
+
+  * var a=null;//a的类型是object，适用于在像存一个object类型，但不确定具体值。
+
+  * 简单数据类型
+
+    > 如var a=10;会在栈内开辟空间存储10，变量a指向它，若修改a的值，是修改10为其他的值；若为复杂数据类型数组，则栈内存储数组的首地址，arr指向它，而数组的具体每一项的值存储在堆；若为一个对象，则栈内存储数组的首地址，o指向它，关于他的属性等都存储在堆中，当修改了直接在堆中修改，若给另一个变量赋值，则是给他赋地址。
+    >
+    > 有参的函数调用的过程，就相当于定义了一个变量和实参变量a存储的内容相同。
+    
+  * 对于js来说，简单数据类型传值，复杂数据类型传地址
+
+
+
+
+
